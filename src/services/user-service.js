@@ -38,6 +38,14 @@ class UserService {
         }
     }
 
+    checkPassword(userInputPlainPassword,encryptedPassword){
+        try{
+            return bcrypy.compareSync(userInputPlainPassword,encryptedPassword);
+        }catch(error){  console.log("Something went wrong in service layer : Password comparison");
+            throw error;
+        }
+    }
+
 
 
 }
