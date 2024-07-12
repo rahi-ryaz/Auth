@@ -75,6 +75,9 @@ class UserService {
         }
     }
 
+
+
+
     verifyToken(token) {
         try{
             const response = jwt.verify(token,JWT_KEY);
@@ -84,6 +87,9 @@ class UserService {
             throw error;
         }
     }
+
+
+
 
     checkPassword(userInputPlainPassword,encryptedPassword){
         try{
@@ -96,7 +102,22 @@ class UserService {
 
 
 
+
+
+ isAdmin(userId){
+    try{
+        return this.userRepository.isAdmin(userId);
+        
+    }catch(error){  
+        console.log("Something went wrong in service layer : Password comparison");
+        throw error;
+    }
+ }
+
 }
+
+
+
 
 
 module.exports = UserService;

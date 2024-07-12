@@ -53,7 +53,7 @@ const create =async(req,res)=> {
         try{
             const token= req.headers['x-axis-token'];
 
-            const response = await userService.isAuthenticated(token);
+            const response = await UserService.isAuthenticated(token);
 
             return res.status(200).json({
                 success:true,
@@ -73,8 +73,34 @@ const create =async(req,res)=> {
         }
     }
 
+
+
+
+    const isAdmin = async(req,res) =>{
+        try{
+            const response= await userService.isAdmin(req.body.id);
+
+            return res.status(200).json({
+                success:true,
+                data: response,
+                err: {},
+                message: "Successfully fetched whether user is admin or not",
+            });
+        }catch(error){
+            console.log(error);
+            return res.status(500).json({
+                message:"something went wrong",
+                data:{},
+                success: false,
+                err:error,
+            });
+        }
+    }
+
+
  module.exports={
     create,
     signIn,
-    isAuthenticated
+    isAuthenticated,
+    isAdmin
  }   
