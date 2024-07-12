@@ -17,12 +17,13 @@ const create =async(req,res)=> {
             err: {}
         });
     }catch(error){
-        console.log(error);
-        return res.status(500).json({
-            message:"something went wrong",
+        console.log("controler",error);
+        //console.log("controller",error.statusCode)
+        return res.status(201).json({
+            message: error.message,
             data:{},
             success: false,
-            err:error,
+            err:error.explanation,
         });
     }
     }
