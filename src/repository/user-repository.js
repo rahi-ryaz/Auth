@@ -1,5 +1,7 @@
-const { ValidationError } = require("sequelize");
+const ValidationError  = require("../utils/validation-error");
 const { User, Role } = require("../models/index");
+const ClientError = require("../utils/client-error");
+const { StatusCodes } = require("http-status-codes")
 
 class UserRepository{
 
@@ -53,6 +55,16 @@ class UserRepository{
                 email : userEmail
             }  
             });
+            console.log(user,"from repo log client error")
+            if(!user){
+                throw new ClientError(
+                    'AttributeNotFound',
+                    'Invalid email sent in the request',
+                    'Please check the email , as there is no record of the email',
+                    StatusCodes.NOT_FOUND
+                )
+                
+            }
             return user;
         }catch(error){  console.log("Something went wrong in repo layer");
             throw error;
