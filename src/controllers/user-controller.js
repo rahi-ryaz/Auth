@@ -54,7 +54,8 @@ const create =async(req,res)=> {
         try{
             const token= req.headers['x-axis-token'];
 
-            const response = await UserService.isAuthenticated(token);
+            const response = await userService.isAuthenticated(token);
+            
 
             return res.status(200).json({
                 success:true,
@@ -73,8 +74,6 @@ const create =async(req,res)=> {
             });
         }
     }
-
-
 
 
     const isAdmin = async(req,res) =>{
